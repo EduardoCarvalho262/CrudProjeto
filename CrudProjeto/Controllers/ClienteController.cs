@@ -21,7 +21,11 @@ namespace CrudProjeto.Controllers
             _db = db;
         }
 
-        // GET: api/Cliente
+        /// <summary>
+        /// Obter lista de clientes.
+        /// </summary>
+        /// <response code="200">A lista foi obtida com sucesso.</response>
+        /// <response code="500">Ocorreu um erro ao obter a lista de  clientes.</response>
         [HttpGet]
        public IEnumerable<Cliente> Get()
         {
@@ -29,7 +33,13 @@ namespace CrudProjeto.Controllers
         }
 
 
-        // GET: api/Cliente/5
+        /// <summary>
+        /// Obter um cliente por ID.
+        /// </summary>
+        /// <param name="id">Id do cliente.</param>
+        /// <response code="200">O cliente foi obtido com sucesso.</response>
+        /// <response code="404">Não foi encontrado cliente com ID especificado.</response>
+        /// <response code="500">Ocorreu um erro ao obter o cliente.</response>
         [HttpGet("{id}")]
         public ActionResult<Cliente> Get(int id)
         {
@@ -45,6 +55,16 @@ namespace CrudProjeto.Controllers
         }
 
 
+        /// <summary>
+        /// Atualizar um cliente por ID.
+        /// </summary>
+        /// <param name="id">Id do cliente.</param>
+        /// <param name="cliente">Modelo do usuário.</param>
+        ///<response code="200">O cliente foi atualizado com sucesso.</response>
+        /// <response code="204">O cliente foi atualizado com sucesso.</response>
+        /// <response code="400">Não foi encontrado cliente com ID especificado.</response>
+        /// <response code="500">Ocorreu um erro ao obter o cliente.</response>
+
         [HttpPut("{id}")]
         public ActionResult<Cliente> Put(int id, Cliente cliente)
         {
@@ -59,11 +79,17 @@ namespace CrudProjeto.Controllers
 
             return NoContent();
 
-
         }
 
 
-        // POST: api/Cliente
+        /// <summary>
+        /// Criar um cliente.
+        /// </summary>
+        /// <param name="cliente">Objeto cliente.</param>
+        ///<response code="200">O cliente foi criado com sucesso.</response>
+        /// <response code="201">O cliente foi criado com sucesso.</response>
+        /// <response code="500">Ocorreu um erro ao obter o cliente.</response>
+
         [HttpPost]
         public ActionResult<Cliente> Post(Cliente cliente)
         {
@@ -73,7 +99,15 @@ namespace CrudProjeto.Controllers
         }
 
 
-        // DELETE: api/Cliente/5
+        /// <summary>
+        /// Deletar um cliente por ID.
+        /// </summary>
+        /// <param name="id">Id do cliente.</param>
+        /// <response code="200">O cliente foi deletado com sucesso.</response>
+        /// <response code="204">O cliente foi deletado com sucesso.</response>
+        /// <response code="404">Não foi encontrado cliente com ID especificado.</response>
+        /// <response code="500">Ocorreu um erro ao obter o cliente.</response>
+
         [HttpDelete("{id}")]
         public ActionResult<Cliente> Delete(int id)
         {
