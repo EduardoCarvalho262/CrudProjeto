@@ -15,11 +15,24 @@ namespace CrudProjeto.Models
         public string Nome { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Informe o sobrenome")]
-        [MinLength(3, ErrorMessage = "O nome deve ter um tamanho mínimo de 3 caracteres.")]
+        [MinLength(3, ErrorMessage = "O sobrenome deve ter um tamanho mínimo de 3 caracteres.")]
         public string Sobrenome { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Informe o telefone")]
-        [MinLength(9, ErrorMessage = "O nome deve ter um tamanho mínimo de 9 caracteres.")]
+        [MinLength(9, ErrorMessage = "O telefone deve ter um tamanho mínimo de 9 caracteres.")]
         public string Telefone { get; set; }
+
+        public Cliente()
+        {
+                
+        }
+
+        public Cliente(int id, string nome, string sobrenome, string telefone)
+        {
+            this.Id = id;
+            this.Nome = nome;
+            this.Sobrenome = sobrenome;
+            this.Telefone = telefone;
+        }
     }
 }
