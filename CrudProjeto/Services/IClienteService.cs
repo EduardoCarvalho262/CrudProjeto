@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CrudProjeto.Services
 {
-    interface IClienteService
+    public interface IClienteService
     {
         IEnumerable<Cliente> Obter();
         Cliente ObterPorId(int id);

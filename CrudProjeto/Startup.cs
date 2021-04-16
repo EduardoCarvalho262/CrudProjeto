@@ -31,8 +31,9 @@ namespace CrudProjeto
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IClienteService, ClienteService>();
+            
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IClienteService, ClienteService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -61,6 +62,7 @@ namespace CrudProjeto
             app.UseRouting();
 
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

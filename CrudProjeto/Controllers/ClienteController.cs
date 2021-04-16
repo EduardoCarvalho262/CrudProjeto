@@ -15,11 +15,11 @@ namespace CrudProjeto.Controllers
     public class ClienteController : ControllerBase
     {
         //Injeção de dependência
-        private ClienteService clienteService;
+        private readonly IClienteService _clienteService;
 
-        public ClienteController(ClienteService service)
+        public ClienteController(IClienteService clienteService)
         {
-            clienteService = service;
+            _clienteService = clienteService;
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace CrudProjeto.Controllers
         [HttpGet]
         public IEnumerable<Cliente> Get()
         {
-            return clienteService.Obter();
+            return _clienteService.Obter();
         }
 
 
@@ -45,7 +45,7 @@ namespace CrudProjeto.Controllers
         public ActionResult<Cliente> Get(int id)
         {
 
-            var c = clienteService.ObterPorId(id);
+            var c = _clienteService.ObterPorId(id);
 
             if(c == null)
             {
@@ -74,7 +74,7 @@ namespace CrudProjeto.Controllers
                 return BadRequest();
             }
 
-            clienteService.Atualizar(cliente);
+            _clienteService.Atualizar(cliente);
 
             return NoContent();
 
@@ -91,7 +91,7 @@ namespace CrudProjeto.Controllers
         [HttpPost]
         public ActionResult<Cliente> Post(Cliente cliente)
         {
-            clienteService.Criar(cliente);
+            _clienteService.Criar(cliente);
             return CreatedAtAction("Get", new { id = cliente.Id }, cliente);
         }
 
@@ -107,13 +107,13 @@ namespace CrudProjeto.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Cliente> Delete(int id)
         {
-            var cliente = clienteService.ObterPorId(id);
+            var cliente = _clienteService.ObterPorId(id);
             if(cliente == null)
             {
                 return NotFound();
             }
 
-            clienteService.Deletar(cliente);
+            _clienteService.Deletar(cliente);
             return NoContent();
         }
     }
