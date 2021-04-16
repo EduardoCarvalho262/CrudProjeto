@@ -9,7 +9,7 @@ namespace CrudProjeto.Services
 {
     public interface IClienteService
     {
-        IEnumerable<Cliente> Obter();
+        List<Cliente> Obter();
         Cliente ObterPorId(int id);
         Cliente Atualizar(Cliente cliente);
         Cliente Criar(Cliente cliente);

@@ -28,7 +28,7 @@ namespace CrudProjeto.Controllers
         /// <response code="200">A lista foi obtida com sucesso.</response>
         /// <response code="500">Ocorreu um erro ao obter a lista de  clientes.</response>
         [HttpGet]
-        public IEnumerable<Cliente> Get()
+        public List<Cliente> Get()
         {
             return _clienteService.Obter();
         }

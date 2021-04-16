@@ -29,9 +29,9 @@ namespace CrudProjeto.Services
             return cliente;
         }
 
-        public IEnumerable<Cliente> Obter()
+        public List<Cliente> Obter()
         {
-            return _db.Clientes;
+            return _db.Clientes.ToList();
         }
 
         public Cliente ObterPorId(int id)
