@@ -21,6 +21,8 @@ namespace CrudProjeto.Services
         }
 
 
+        //TODO - todos os services precisam do try-catch e
+        //precisam implementar Serilog
         public Cliente Deletar(Cliente cliente)
         {
             _db.Clientes.Remove(cliente);

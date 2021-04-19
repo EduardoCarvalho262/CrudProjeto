@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudProjeto", "CrudProjeto\CrudProjeto.csproj", "{C4342320-6A8A-40B5-AE38-8C998DF683D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCrud", "TestCrud\TestCrud.csproj", "{C521F149-2F1C-4AC6-AC6B-CD82E701B3A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestCrud", "TestCrud\TestCrud.csproj", "{C521F149-2F1C-4AC6-AC6B-CD82E701B3A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
