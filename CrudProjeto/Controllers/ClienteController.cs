@@ -1,5 +1,6 @@
 ﻿using CrudProjeto.Data;
 using CrudProjeto.Models;
+using CrudProjeto.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,11 +15,11 @@ namespace CrudProjeto.Controllers
     public class ClienteController : ControllerBase
     {
         //Injeção de dependência
-        private readonly ApplicationDbContext _db;
+        private readonly IClienteService _clienteService;
 
-        public ClienteController(ApplicationDbContext db)
+        public ClienteController(IClienteService clienteService)
         {
-            _db = db;
+            _clienteService = clienteService;
         }
 
         /// <summary>
@@ -27,9 +28,9 @@ namespace CrudProjeto.Controllers
         /// <response code="200">A lista foi obtida com sucesso.</response>
         /// <response code="500">Ocorreu um erro ao obter a lista de  clientes.</response>
         [HttpGet]
-       public IEnumerable<Cliente> Get()
+        public List<Cliente> Get()
         {
-            return _db.Clientes;
+            return _clienteService.Obter();
         }
 
 
@@ -44,14 +45,14 @@ namespace CrudProjeto.Controllers
         public ActionResult<Cliente> Get(int id)
         {
 
-            var c = _db.Clientes.Find(id);
+            var c = _clienteService.ObterPorId(id);
 
             if(c == null)
             {
                 return NotFound();
             }
 
-            return c;
+            return Ok(c);
         }
 
 
@@ -64,7 +65,6 @@ namespace CrudProjeto.Controllers
         /// <response code="204">O cliente foi atualizado com sucesso.</response>
         /// <response code="400">Não foi encontrado cliente com ID especificado.</response>
         /// <response code="500">Ocorreu um erro ao obter o cliente.</response>
-
         [HttpPut("{id}")]
         public ActionResult<Cliente> Put(int id, Cliente cliente)
         {
@@ -74,8 +74,7 @@ namespace CrudProjeto.Controllers
                 return BadRequest();
             }
 
-            _db.Update(cliente);
-            _db.SaveChanges();
+            _clienteService.Atualizar(cliente);
 
             return NoContent();
 
@@ -89,12 +88,10 @@ namespace CrudProjeto.Controllers
         ///<response code="200">O cliente foi criado com sucesso.</response>
         /// <response code="201">O cliente foi criado com sucesso.</response>
         /// <response code="500">Ocorreu um erro ao obter o cliente.</response>
-
         [HttpPost]
         public ActionResult<Cliente> Post(Cliente cliente)
         {
-            _db.Clientes.Add(cliente);
-            _db.SaveChanges();
+            _clienteService.Criar(cliente);
             return CreatedAtAction("Get", new { id = cliente.Id }, cliente);
         }
 
@@ -107,22 +104,17 @@ namespace CrudProjeto.Controllers
         /// <response code="204">O cliente foi deletado com sucesso.</response>
         /// <response code="404">Não foi encontrado cliente com ID especificado.</response>
         /// <response code="500">Ocorreu um erro ao obter o cliente.</response>
-
         [HttpDelete("{id}")]
         public ActionResult<Cliente> Delete(int id)
         {
-            var cliente = _db.Clientes.Find(id);
+            var cliente = _clienteService.ObterPorId(id);
             if(cliente == null)
             {
                 return NotFound();
             }
 
-            _db.Clientes.Remove(cliente);
-            _db.SaveChanges();
+            _clienteService.Deletar(cliente);
             return NoContent();
         }
-
-
-
     }
 }
