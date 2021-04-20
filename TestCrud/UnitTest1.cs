@@ -27,12 +27,13 @@ namespace TestCrud
         {
             _mockService.Setup(r => r.Obter()).Returns(new List<Cliente> {
                 new Cliente { Id = 1, Nome = "Edu", Sobrenome = "Carvalho",Telefone = "41445907" },
-                new Cliente { Id = 2, Nome = "Eduardo", Sobrenome = "Cutrim",Telefone = "41445908" }
+                new Cliente { Id = 2, Nome = "Eduardo", Sobrenome = "Cutrim",Telefone = "41445908" },
+                new Cliente { Id = 3, Nome = "Dudu", Sobrenome = "Cutrim",Telefone = "41445978" }
             });
 
             var lista = _controller.Get();
 
-            var esperado = 2;
+            var esperado = 3;
 
             Assert.AreEqual(esperado, lista.Count);
 
