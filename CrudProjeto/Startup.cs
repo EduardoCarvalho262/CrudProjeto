@@ -1,21 +1,16 @@
 using CrudProjeto.Data;
 using CrudProjeto.Services;
+using Infra.Repositorio;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace CrudProjeto
 {
@@ -34,6 +29,7 @@ namespace CrudProjeto
             
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IClienteService, ClienteService>();
+            services.AddScoped(typeof(IRepositorio<>), typeof(Repositorio<>));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
