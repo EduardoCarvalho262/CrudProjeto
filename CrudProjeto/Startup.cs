@@ -11,6 +11,8 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using System.Reflection;
+using Serilog;
+using Infra.Data;
 
 namespace CrudProjeto
 {
@@ -26,7 +28,8 @@ namespace CrudProjeto
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
+            services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped(typeof(IRepositorio<>), typeof(Repositorio<>));
@@ -56,6 +59,8 @@ namespace CrudProjeto
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseSerilogRequestLogging();
 
             app.UseAuthorization();
 
