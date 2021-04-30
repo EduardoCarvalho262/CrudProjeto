@@ -1,8 +1,10 @@
 ﻿using CrudProjeto.Data;
 using CrudProjeto.Models;
 using CrudProjeto.Services;
+using Dominio.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +30,7 @@ namespace CrudProjeto.Controllers
         /// <response code="200">A lista foi obtida com sucesso.</response>
         /// <response code="500">Ocorreu um erro ao obter a lista de  clientes.</response>
         [HttpGet]
-        public List<Cliente> Get()
+        public List<ClienteDto> Get()
         {
             return _clienteService.Obter();
         }
@@ -42,7 +44,7 @@ namespace CrudProjeto.Controllers
         /// <response code="404">Não foi encontrado cliente com ID especificado.</response>
         /// <response code="500">Ocorreu um erro ao obter o cliente.</response>
         [HttpGet("{id}")]
-        public ActionResult<Cliente> Get(int id)
+        public ActionResult<ClienteDto> Get(int id)
         {
 
             var c = _clienteService.ObterPorId(id);
@@ -66,7 +68,7 @@ namespace CrudProjeto.Controllers
         /// <response code="400">Não foi encontrado cliente com ID especificado.</response>
         /// <response code="500">Ocorreu um erro ao obter o cliente.</response>
         [HttpPut("{id}")]
-        public ActionResult<Cliente> Put(int id, Cliente cliente)
+        public ActionResult<ClienteDto> Put(int id, ClienteDto cliente)
         {
 
             if (id != cliente.Id)
@@ -89,7 +91,7 @@ namespace CrudProjeto.Controllers
         /// <response code="201">O cliente foi criado com sucesso.</response>
         /// <response code="500">Ocorreu um erro ao obter o cliente.</response>
         [HttpPost]
-        public ActionResult<Cliente> Post(Cliente cliente)
+        public ActionResult<ClienteDto> Post(ClienteDto cliente)
         {
             _clienteService.Criar(cliente);
             return CreatedAtAction("Get", new { id = cliente.Id }, cliente);
